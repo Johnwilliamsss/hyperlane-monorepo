@@ -11,21 +11,21 @@ import {TestRecipient} from "../../contracts/test/TestRecipient.sol";
 import {TestIsm} from "../../contracts/test/TestIsm.sol";
 
 contract DeployArbHook is Script {
-    uint256 deployerPrivateKey;
+    uint256 private deployerPrivateKey;
 
-    ArbL2ToL1Hook hook;
-    ArbL2ToL1Ism ism;
+    ArbL2ToL1Hook private hook;
+    ArbL2ToL1Ism private ism;
 
-    uint32 constant L1_DOMAIN = 11155111;
-    address constant L1_MAILBOX = 0xfFAEF09B3cd11D9b20d1a19bECca54EEC2884766;
-    address constant L1_BRIDGE = 0x38f918D0E9F1b721EDaA41302E399fa1B79333a9;
-    address constant L1_ISM = 0x096A1c034c7Ad113B6dB786b7BA852cB67025458; // placeholder
-    bytes32 TEST_RECIPIENT =
+    uint32 private constant L1_DOMAIN = 11155111;
+    address private constant L1_MAILBOX = 0xfFAEF09B3cd11D9b20d1a19bECca54EEC2884766;
+    address private constant L1_BRIDGE = 0x38f918D0E9F1b721EDaA41302E399fa1B79333a9;
+    address private constant L1_ISM = 0x096A1c034c7Ad113B6dB786b7BA852cB67025458; // placeholder
+    bytes32 private constant TEST_RECIPIENT =
         0x000000000000000000000000155b1cd2f7cbc58d403b9be341fab6cd77425175; // placeholder
 
-    address constant ARBSYS = 0x0000000000000000000000000000000000000064;
-    address constant L2_MAILBOX = 0x598facE78a4302f11E3de0bee1894Da0b2Cb71F8;
-    address constant L2_HOOK = 0xd9d99AC1C645563576b8Df22cBebFC23FB60Ec73; // placeholder
+    address private constant ARBSYS = 0x0000000000000000000000000000000000000064;
+    address private constant L2_MAILBOX = 0x598facE78a4302f11E3de0bee1894Da0b2Cb71F8;
+    address private constant L2_HOOK = 0xd9d99AC1C645563576b8Df22cBebFC23FB60Ec73; // placeholder
 
     function deployIsm() external {
         deployerPrivateKey = vm.envUint("DEPLOYER_PRIVATE_KEY");
@@ -50,7 +50,7 @@ contract DeployArbHook is Script {
             L1_DOMAIN,
             TypeCasts.addressToBytes32(L1_ISM),
             ARBSYS,
-            200_000 // estimated gas amount used for verify
+            200_000 // Estimated gas amount used for verify
         );
 
         vm.stopBroadcast();
